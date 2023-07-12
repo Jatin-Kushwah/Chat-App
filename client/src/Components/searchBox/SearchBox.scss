@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+
+.SearchBox {
+    height: 100%;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        margin: 1rem;
+        box-shadow: 0 0 12px rgb(0 0 0 / 14%);
+        border-radius: 0.5rem;
+
+        .search-icon {
+            background: white;
+            color: #757575;
+            height: 100%;
+            font-size: 1.5rem;
+            padding-left: 0.4rem;
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+
+        input[type="text"] {
+            outline: none;
+            border: none;
+            height: 100%;
+            padding-inline: 4px;
+        }
+
+        .search-button {
+            height: 100%;
+            border: none;
+            background: #1a42bc;
+            color: white;
+            letter-spacing: 0.3px;
+            font-weight: 600;
+            padding-inline: 0.6rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            cursor: pointer;
+            font-family: "Quicksand", sans-serif;
+
+            &:hover {
+                background: #345eda;
+            }
+        }
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    p {
+        font-weight: 600;
+    }
+}

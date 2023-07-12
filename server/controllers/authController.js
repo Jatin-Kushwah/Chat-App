@@ -1,6 +1,7 @@
 const { success, error } = require("../Utils/responseWrapper");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const cloudinary = require("cloudinary").v2;
 const jwt = require("jsonwebtoken");
 
 const signup = async (req, res) => {
@@ -19,10 +20,22 @@ const signup = async (req, res) => {
 
         const hashedPass = await bcrypt.hash(password, 10);
 
+        let userImage =
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
+
+        if (image) {
+            // Upload image to Cloudinary
+            const cloudImg = await cloudinary.uploader.upload(image, {
+                folder: "chatAppImg",
+            });
+
+            userImage = cloudImg.secure_url;
+        }
+
         const newUser = await User.create({
             username,
             email,
-            image,
+            image: userImage,
             password: hashedPass,
         });
 
@@ -37,7 +50,7 @@ const login = async (req, res) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.send(error(400, "Username and Password are required."));
+            return res.send(error(400, "Email and Password are required."));
         }
 
         const user = await User.findOne({ email });
@@ -94,6 +107,18 @@ const refreshAccessToken = async (req, res) => {
     }
 };
 
+const logout = async (req, res) => {
+    try {
+        res.clearCookie("jwt", {
+            httpOnly: true,
+            secure: true,
+        });
+        return res.send(success(200, "user logged out"));
+    } catch (e) {
+        return res.send(error(500, e.message));
+    }
+};
+
 //internal functions
 const generateAccessToken = (data) => {
     try {
@@ -117,4 +142,4 @@ const generateRefreshToken = (data) => {
     }
 };
 
-module.exports = { signup, login };
+module.exports = { signup, login, logout };

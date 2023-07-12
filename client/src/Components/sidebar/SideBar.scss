@@ -1,0 +1,40 @@
+.SideBar {
+    display: flex;
+    width: 70px;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    border-right: 1.5px solid #dddddd;
+
+    .selected {
+        background-color: #1a42bc;
+        display: grid;
+        place-content: center;
+        border-radius: 0.4rem;
+        padding: 0.5rem;
+        animation: popOut 0.3s ease;
+        transform-origin: center;
+    }
+
+    @keyframes popOut {
+        0% {
+            transform: scale(0.2);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    svg {
+        font-size: 1.7rem;
+        color: #818181;
+        cursor: pointer;
+    }
+
+    .selectedIcon {
+        color: white;
+        font-size: 1.6rem;
+    }
+}

@@ -20,4 +20,13 @@ const searchUser = async (req, res) => {
     }
 };
 
-module.exports = { searchUser };
+const getMYInfo = async (req, res) => {
+    try {
+        const user = await User.findById(req._id);
+        return res.send(success(200, { user }));
+    } catch (err) {
+        return res.send(error(500, err.message));
+    }
+};
+
+module.exports = { searchUser, getMYInfo };
