@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap");
 
-.UserChats {
+.GroupChat {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -23,36 +23,8 @@
             font-family: "Signika Negative", sans-serif;
         }
 
-        img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
-    }
-
-    .searchBar {
-        width: 100%;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        background-color: #e5e5e5;
-        padding: 8px 27px;
-        border-radius: 8px;
-
-        .searchIcon {
-            color: #5a5a5a;
-            font-size: 1.1rem;
-        }
-
-        input {
-            background: #e5e5e5;
-            border: none;
-            outline: none;
-
-            &::placeholder {
-                color: #5a5a5a;
-                font-weight: 500;
-            }
+        svg {
+            font-size: 2rem;
         }
     }
 

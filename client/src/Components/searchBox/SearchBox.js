@@ -1,36 +1,71 @@
 import React, { useEffect, useState } from "react";
 import "./SearchBox.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { searchUser } from "../../redux/slices/userSlice";
+import {
+    getAllUsers,
+    searchUser,
+    setLoading,
+} from "../../redux/slices/userSlice";
 import { AiOutlineSearch } from "react-icons/ai";
-import { Spinner } from "@chakra-ui/react";
 import UserListItem from "../userListItem.js/UserListItem";
 import ChatLoading from "../ChatLoading";
+import { accessChat } from "../../redux/slices/chatSlice";
 
 function SearchBox() {
     const dispatch = useDispatch();
     const [searchQuery, setSearchQuery] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [count, setCount] = useState(0);
 
     const searchResults = useSelector(
         (state) => state.userReducer.searchResults
     );
+    const isLoading = useSelector((state) => state.userReducer.isLoading);
+    const allUsersData = useSelector((state) => state.userReducer.allUsersData);
 
     useEffect(() => {
-        setCount(searchResults?.length);
-    }, [searchResults]);
+        const fetchAllUsers = async () => {
+            try {
+                dispatch(setLoading(true));
+                await dispatch(getAllUsers());
+            } catch (error) {
+                console.log(error);
+            } finally {
+                dispatch(setLoading(false));
+            }
+        };
+
+        fetchAllUsers();
+    }, [dispatch]);
 
     const handleSearch = async (event) => {
         event.preventDefault();
         try {
-            setLoading(true);
+            dispatch(setLoading(true));
             await dispatch(searchUser(searchQuery));
             setSearchQuery("");
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false);
+            dispatch(setLoading(false));
+        }
+    };
+
+    const handleInputChange = async (event) => {
+        try {
+            dispatch(setLoading(true));
+            await setSearchQuery(event.target.value);
+            await dispatch(searchUser(event.target.value));
+        } catch (error) {
+            console.log(error);
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
+    const handleUserClick = async (userId) => {
+        try {
+            await dispatch(accessChat(userId));
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -42,26 +77,40 @@ function SearchBox() {
                     <input
                         type="text"
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search User..."
+                        onChange={handleInputChange}
+                        placeholder="Search or start new chat"
                     />
                     <button type="submit" className="search-button">
                         Search
                     </button>
                 </div>
             </form>
-            {loading ? (
+            {isLoading ? (
                 <div style={{ marginTop: "16px" }}>
-                    <ChatLoading count={count} />
+                    <ChatLoading />
                 </div>
-            ) : searchResults && searchResults.length > 0 ? (
-                <ul>
-                    {searchResults.map((user) => (
-                        <UserListItem key={user._id} user={user} />
-                    ))}
-                </ul>
             ) : (
-                <p>Search Results Here</p>
+                <ul>
+                    {searchQuery === ""
+                        ? allUsersData.map((user) => (
+                              <UserListItem
+                                  key={user._id}
+                                  user={user}
+                                  handleUserClick={() =>
+                                      handleUserClick(user._id)
+                                  }
+                              />
+                          ))
+                        : searchResults.map((user) => (
+                              <UserListItem
+                                  key={user._id}
+                                  user={user}
+                                  handleUserClick={() =>
+                                      handleUserClick(user._id)
+                                  }
+                              />
+                          ))}
+                </ul>
             )}
         </div>
     );

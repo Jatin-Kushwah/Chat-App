@@ -1,6 +1,7 @@
 const { error, success } = require("../Utils/responseWrapper");
 const Chat = require("../models/Chat");
 const User = require("../models/User");
+const cloudinary = require("cloudinary").v2;
 
 const userChat = async (req, res) => {
     try {
@@ -68,7 +69,7 @@ const getChats = async (req, res) => {
 
 const createGroupChat = async (req, res) => {
     try {
-        const { name, users } = req.body;
+        const { name, users, image } = req.body;
         const currentUser = req._id;
 
         if (!name || !users) {
@@ -81,11 +82,24 @@ const createGroupChat = async (req, res) => {
         // adding currentUser in parsedUser array
         parsedUser.push(currentUser);
 
+        let groupImage =
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
+
+        if (image) {
+            // Upload image to Cloudinary
+            const cloudImg = await cloudinary.uploader.upload(image, {
+                folder: "chatAppImg",
+            });
+
+            groupImage = cloudImg.secure_url;
+        }
+
         const groupChat = await Chat.create({
             chatName: name,
             isGroupChat: true,
             users: parsedUser,
             groupAdmin: currentUser,
+            image: groupImage,
         });
 
         if (users.length < 2) {

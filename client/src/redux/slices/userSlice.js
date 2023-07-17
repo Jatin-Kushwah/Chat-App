@@ -11,13 +11,22 @@ export const getMyInfo = createAsyncThunk("myInfo", async () => {
     }
 });
 
+export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
+    try {
+        const response = await axiosClient.get("/user/getAllUsers");
+        return response.result;
+    } catch (error) {
+        console.error(error);
+        return Promise.reject(error);
+    }
+});
+
 export const searchUser = createAsyncThunk(
     "userSlice/searchUser",
     async (searchQuery) => {
         try {
             const response = await axiosClient.get(
-                `/user?search=${searchQuery}`,
-                {}
+                `/user?search=${searchQuery}`
             );
             return response.result;
         } catch (error) {
@@ -32,6 +41,7 @@ const userSlice = createSlice({
         isLoading: false,
         myInfo: null,
         searchResults: [],
+        allUsersData: [],
     },
     reducers: {
         setLoading: (state, action) => {
@@ -45,6 +55,9 @@ const userSlice = createSlice({
         builder
             .addCase(getMyInfo.fulfilled, (state, action) => {
                 state.myInfo = action.payload;
+            })
+            .addCase(getAllUsers.fulfilled, (state, action) => {
+                state.allUsersData = action.payload;
             })
             .addCase(searchUser.fulfilled, (state, action) => {
                 state.searchResults = action.payload;

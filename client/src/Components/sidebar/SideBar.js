@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./SideBar.scss";
 import { BsChatSquareText } from "react-icons/bs";
 import { MdGroups } from "react-icons/md";
-import { AiOutlineSearch } from "react-icons/ai";
+import { BiMessageAdd } from "react-icons/bi";
 import { removeItem, KEY_ACCESS_TOKEN } from "../../Utils/localStorageManager";
 import { axiosClient } from "../../Utils/axiosClient";
 import { TbLogout } from "react-icons/tb";
@@ -23,6 +23,8 @@ function SideBar() {
             setSelectedIcon("chat");
         } else if (path === "/search") {
             setSelectedIcon("search");
+        } else if (path === "/group") {
+            setSelectedIcon("group");
         } else {
             setSelectedIcon("");
         }
@@ -61,7 +63,7 @@ function SideBar() {
                 }`}
                 onClick={() => handleIconClick("search", "/search")}
             >
-                <AiOutlineSearch
+                <BiMessageAdd
                     className={selectedIcon === "search" ? "selectedIcon" : ""}
                 />
             </div>
@@ -69,7 +71,7 @@ function SideBar() {
                 className={`groupIcon ${
                     selectedIcon === "group" ? "selected" : ""
                 }`}
-                onClick={() => handleIconClick("group", "/")}
+                onClick={() => handleIconClick("group", "/group")}
             >
                 <MdGroups
                     className={selectedIcon === "group" ? "selectedIcon" : ""}

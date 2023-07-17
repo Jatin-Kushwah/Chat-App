@@ -6,6 +6,7 @@ import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import UserChats from "./Components/userchats/UserChats";
 import SearchBox from "./Components/searchBox/SearchBox";
+import GroupChat from "./Components/groupChat/GroupChat";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route element={<Home />}>
                         <Route path="/" element={<UserChats />} />
                         <Route path="/search" element={<SearchBox />} />
+                        <Route path="/group" element={<GroupChat />} />
                     </Route>
                 </Route>
 
