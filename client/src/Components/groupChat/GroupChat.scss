@@ -28,6 +28,32 @@
         }
     }
 
+    .newGroup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        background-color: #e5e5e5;
+        border-radius: 8px;
+        width: 100%;
+        padding: 1rem;
+        font-weight: 600;
+        color: #202124;
+        cursor: pointer;
+        transition: 0.2s ease;
+
+        &:hover {
+            background-color: #d6d6d6;
+        }
+
+        span {
+        }
+
+        svg {
+            font-size: 1.5rem;
+        }
+    }
+
     .singleChats {
         display: flex;
         flex-direction: column;

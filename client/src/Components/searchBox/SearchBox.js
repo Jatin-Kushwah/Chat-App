@@ -7,7 +7,7 @@ import {
     setLoading,
 } from "../../redux/slices/userSlice";
 import { AiOutlineSearch } from "react-icons/ai";
-import UserListItem from "../userListItem.js/UserListItem";
+import UserListItem from "../userListItem/UserListItem";
 import ChatLoading from "../ChatLoading";
 import { accessChat } from "../../redux/slices/chatSlice";
 

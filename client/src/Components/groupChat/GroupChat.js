@@ -1,36 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./GroupChat.scss";
-import { MdGroups } from "react-icons/md";
+import { MdGroups, MdGroupAdd } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../redux/slices/userSlice";
 import SingleChat from "../singleChat/SingleChat";
 import { getUserChats, selectChat } from "../../redux/slices/chatSlice";
 import ChatLoading from "../ChatLoading";
+import NewGroupBox from "./newGroupBox/NewGroupBox";
 
 function GroupChat() {
     const dispatch = useDispatch();
+    const [openNewGroup, setOpenNewGroup] = useState(false);
 
     const userChats = useSelector((state) => state.chatReducer.userChats);
     const selectedChat = useSelector((state) => state.chatReducer.selectedChat);
     const isLoading = useSelector((state) => state.userReducer.isLoading);
 
     useEffect(() => {
-        const fetchUserChats = async () => {
-            try {
-                dispatch(setLoading(true));
-                await dispatch(getUserChats());
-            } catch (error) {
-                console.error(error);
-            } finally {
-                dispatch(setLoading(false));
-            }
-        };
-
         fetchUserChats();
-    }, [dispatch]);
+    }, []);
+
+    const fetchUserChats = async () => {
+        try {
+            dispatch(setLoading(true));
+            await dispatch(getUserChats());
+        } catch (error) {
+            console.error(error);
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
 
     const handleChatClick = (chat) => {
         dispatch(selectChat(chat));
+    };
+
+    const handleNewGroupBoxClose = () => {
+        setOpenNewGroup(false);
+        fetchUserChats();
     };
 
     return (
@@ -39,6 +46,21 @@ function GroupChat() {
                 <div className="heading">Groups</div>
                 <MdGroups />
             </div>
+
+            <div
+                className="newGroup"
+                onClick={() => setOpenNewGroup(!openNewGroup)}
+            >
+                <MdGroupAdd />
+                <span>Create new group</span>
+            </div>
+
+            {openNewGroup && (
+                <NewGroupBox
+                    closeNewGroup={handleNewGroupBoxClose}
+                    setOpenNewGroup={setOpenNewGroup}
+                />
+            )}
 
             {isLoading ? (
                 <ChatLoading />

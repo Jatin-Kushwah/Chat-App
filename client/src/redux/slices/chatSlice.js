@@ -30,6 +30,7 @@ const chatSlice = createSlice({
     },
     reducers: {
         selectChat: (state, action) => {
+            console.log(action.payload);
             state.selectedChat = action.payload;
         },
     },
@@ -39,6 +40,7 @@ const chatSlice = createSlice({
                 state.userChats = action.payload;
             })
             .addCase(accessChat.fulfilled, (state, action) => {
+                console.log(action.payload);
                 state.openedChat = action.payload;
             });
     },

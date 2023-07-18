@@ -1,3 +1,20 @@
 .ChatBox {
+    display: grid;
+    place-content: center;
     height: 100%;
+
+    .start-heading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        img {
+            width: 60%;
+        }
+    }
 }

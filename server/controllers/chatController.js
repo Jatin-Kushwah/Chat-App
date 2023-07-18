@@ -49,7 +49,6 @@ const getChats = async (req, res) => {
         const currentUser = req._id;
 
         const query = {
-            isGroupChat: false,
             users: currentUser,
         };
 
@@ -108,7 +107,8 @@ const createGroupChat = async (req, res) => {
 
         const createdGroupChat = await Chat.findById(groupChat._id)
             .populate("users", "-password")
-            .populate("groupAdmin", "-password");
+            .populate("groupAdmin", "-password")
+            .populate("image");
 
         return res.send(success(201, createdGroupChat));
     } catch (err) {
