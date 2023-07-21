@@ -30,7 +30,6 @@ const chatSlice = createSlice({
     },
     reducers: {
         selectChat: (state, action) => {
-            console.log(action.payload);
             state.selectedChat = action.payload;
         },
     },

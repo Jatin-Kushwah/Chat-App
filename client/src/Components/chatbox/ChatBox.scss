@@ -1,12 +1,43 @@
 .ChatBox {
-    display: grid;
-    place-content: center;
     height: 100%;
 
-    .start-heading {
+    .chat-container {
         display: flex;
+        height: 100%;
         flex-direction: column;
+        background-color: antiquewhite;
+
+        .topBar {
+            background-color: white;
+
+            .userProfile {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-block: 0.5rem;
+                gap: 1rem;
+                cursor: pointer;
+
+                img {
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                h3 {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .start-heading {
+        display: grid;
+        place-content: center;
+        place-items: center;
         align-items: center;
+        height: 100%;
 
         p {
             font-size: 1.5rem;

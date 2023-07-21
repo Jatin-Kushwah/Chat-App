@@ -8,7 +8,7 @@ import { TiDelete } from "react-icons/ti";
 import userImage from "../../../assets/group.png";
 import { axiosClient } from "../../../Utils/axiosClient";
 
-function NewGroupBox({ setOpenNewGroup, closeNewGroup }) {
+function NewGroupBox({ closeNewGroup }) {
     const dispatch = useDispatch();
     const [groupName, setGroupName] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
@@ -39,6 +39,7 @@ function NewGroupBox({ setOpenNewGroup, closeNewGroup }) {
 
     const handleUserClick = (user) => {
         if (selectedUsers.includes(user)) {
+            console.log("User is already in the group");
             return;
         }
         setSelectedUsers([...selectedUsers, user]);
@@ -61,8 +62,8 @@ function NewGroupBox({ setOpenNewGroup, closeNewGroup }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!groupName || !selectedUsers) {
-            console.log("Fill all the fields");
+        if (!groupName || selectedUsers.length < 2) {
+            console.log("Group must have more than 2 users");
             return;
         }
 

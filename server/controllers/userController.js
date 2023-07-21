@@ -21,10 +21,11 @@ const searchUser = async (req, res) => {
     try {
         const currentUser = req._id;
 
-        const users = req.query.search
+        const searchQuery = req.query.search;
+
+        const users = searchQuery
             ? await User.find({
-                  username: { $regex: req.query.search, $options: "i" },
-                  email: { $regex: req.query.search, $options: "i" },
+                  username: { $regex: searchQuery, $options: "i" },
                   _id: { $ne: currentUser },
               })
             : null;

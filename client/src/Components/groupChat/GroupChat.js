@@ -56,10 +56,7 @@ function GroupChat() {
             </div>
 
             {openNewGroup && (
-                <NewGroupBox
-                    closeNewGroup={handleNewGroupBoxClose}
-                    setOpenNewGroup={setOpenNewGroup}
-                />
+                <NewGroupBox closeNewGroup={handleNewGroupBoxClose} />
             )}
 
             {isLoading ? (

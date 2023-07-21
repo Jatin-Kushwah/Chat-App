@@ -190,6 +190,47 @@ const removeFromGroup = async (req, res) => {
             .populate("groupAdmin", "-password");
 
         if (!updatedGroupChat) {
+            return res.send(error(404, "Group chat not found"));
+        }
+
+        return res.send(success(200, updatedGroupChat));
+    } catch (err) {
+        console.log(err);
+        return res.send(error(500, err.message));
+    }
+};
+
+const updateGroupImage = async (req, res) => {
+    try {
+        const { chatId, newImage } = req.body;
+
+        if (!chatId || !newImage) {
+            res.send(error(400, "Fill all the fields."));
+        }
+
+        let groupImage =
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
+
+        if (newImage) {
+            // Upload new image to Cloudinary
+            const cloudImg = await cloudinary.uploader.upload(newImage, {
+                folder: "chatAppImg",
+            });
+
+            groupImage = cloudImg.secure_url;
+        }
+
+        const updatedGroupChat = await Chat.findByIdAndUpdate(
+            chatId,
+            { image: groupImage },
+            {
+                new: true,
+            }
+        )
+            .populate("users", "-password")
+            .populate("groupAdmin", "-password");
+
+        if (!updatedGroupChat) {
             res.send(error(404, "Group chat not found."));
         }
 
@@ -207,4 +248,5 @@ module.exports = {
     renameGroup,
     addToGroup,
     removeFromGroup,
+    updateGroupImage,
 };

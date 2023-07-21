@@ -3,14 +3,27 @@ import "./ChatBox.scss";
 import { useDispatch, useSelector } from "react-redux";
 import selectImg from "../../assets/SelectChat.png";
 import { selectChat } from "../../redux/slices/chatSlice";
+import ProfileBox from "../profileBox/ProfileBox";
+import GroupInfoBox from "../groupInfoBox/GroupInfoBox";
 
 function ChatBox() {
     const dispatch = useDispatch();
     const [loggedUser, setLoggedUser] = useState();
+    const [user, setUser] = useState();
+    const [openProfile, setOpenProfile] = useState(false);
+    const [openGroupInfo, setOpenGroupInfo] = useState(false);
 
     const myInfo = useSelector((state) => state.userReducer.myInfo);
     const selectedChat = useSelector((state) => state.chatReducer.selectedChat);
     const openedChat = useSelector((state) => state.chatReducer.openedChat);
+
+    const openChat = async (chat) => {
+        try {
+            await dispatch(selectChat(chat));
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
         if (myInfo) {
@@ -20,26 +33,70 @@ function ChatBox() {
 
     useEffect(() => {
         if (openedChat) {
-            dispatch(selectChat(openedChat));
+            openChat(openedChat);
         }
     }, [openedChat, dispatch]);
 
     const chatData = selectedChat;
 
+    useEffect(() => {
+        if (chatData && loggedUser) {
+            const otherUser = chatData.users.find(
+                (user) => user._id !== loggedUser._id
+            );
+            setUser(otherUser);
+        }
+    }, [chatData, loggedUser]);
+
     return (
         <div className="ChatBox">
             {chatData ? (
                 <div className="chat-container">
-                    {!chatData?.isGroupChat &&
-                        chatData?.users?.map((user) => {
-                            if (user?._id !== loggedUser?._id) {
-                                return (
-                                    <div key={user?._id}>{user?.username}</div>
-                                );
-                            }
-                            return null;
-                        })}
-                    {chatData?.isGroupChat && <div>{chatData?.chatName}</div>}
+                    <div className="topBar">
+                        {!chatData?.isGroupChat && user && (
+                            <>
+                                <div
+                                    className="userProfile"
+                                    onClick={() => setOpenProfile(!openProfile)}
+                                >
+                                    <img src={user.image} alt="user avatar" />
+                                    <h3>{user.username}</h3>
+                                </div>
+                                {openProfile && (
+                                    <ProfileBox
+                                        closeProfile={() =>
+                                            setOpenProfile(false)
+                                        }
+                                    />
+                                )}
+                            </>
+                        )}
+                        {chatData?.isGroupChat && (
+                            <>
+                                <div
+                                    className="userProfile"
+                                    onClick={() =>
+                                        setOpenGroupInfo(!openGroupInfo)
+                                    }
+                                >
+                                    <img
+                                        src={chatData.image}
+                                        alt="chat avatar"
+                                    />
+                                    <h3>{chatData?.chatName}</h3>
+                                </div>
+                                {openGroupInfo && (
+                                    <GroupInfoBox
+                                        chat={chatData}
+                                        openChat={openChat}
+                                        closeGroupInfo={() =>
+                                            setOpenGroupInfo(false)
+                                        }
+                                    />
+                                )}
+                            </>
+                        )}
+                    </div>
                 </div>
             ) : (
                 <div className="start-heading">
