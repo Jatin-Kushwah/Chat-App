@@ -41,15 +41,16 @@ const userSlice = createSlice({
         isLoading: false,
         myInfo: null,
         searchResults: [],
+        loggedUser: null,
         allUsersData: [],
     },
     reducers: {
         setLoading: (state, action) => {
             state.isLoading = action.payload;
         },
-        // showToast: (state, action) => {
-        //     state.toastData = action.payload;
-        // },
+        setLoggedUser: (state, action) => {
+            state.loggedUser = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -66,4 +67,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { setLoading } = userSlice.actions;
+export const { setLoading, setLoggedUser } = userSlice.actions;

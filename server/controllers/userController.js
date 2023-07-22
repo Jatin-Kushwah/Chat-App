@@ -48,21 +48,24 @@ const getMYInfo = async (req, res) => {
 
 const updateMyInfo = async (req, res) => {
     try {
-        const { name, userImg } = req.body;
+        const { name, userImg, email } = req.body;
 
         const user = await User.findById(req._id);
 
         if (name) {
             user.username = name;
         }
-        if (userImg) {
+        if (email) {
+            user.email = email;
+        }
+        if (userImg && userImg !== user.image) {
             const cloudImg = await cloudinary.uploader.upload(userImg, {
                 folder: "chatAppImg",
             });
             user.image = cloudImg.secure_url;
         }
         await user.save();
-        return res.send(success(200, { user }));
+        return res.send(success(200, "User Saved Successfully"));
     } catch (err) {
         return res.send(error(500, err.message));
     }

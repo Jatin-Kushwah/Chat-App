@@ -11,21 +11,14 @@ import UserListItem from "../userListItem/UserListItem";
 
 function GroupInfoBox({ chat, closeGroupInfo }) {
     const dispatch = useDispatch();
-    const [loggedUser, setLoggedUser] = useState();
     const [groupImage, setGroupImage] = useState("");
     const [groupName, setGroupName] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
 
-    const myInfo = useSelector((state) => state.userReducer.myInfo);
     const searchResults = useSelector(
         (state) => state.userReducer.searchResults
     );
-
-    useEffect(() => {
-        if (myInfo) {
-            setLoggedUser(myInfo);
-        }
-    }, [myInfo]);
+    const loggedUser = useSelector((state) => state.userReducer.loggedUser);
 
     useEffect(() => {
         setGroupName(chat?.chatName || "");
@@ -82,7 +75,7 @@ function GroupInfoBox({ chat, closeGroupInfo }) {
     };
 
     const handleRemoveUser = async (user) => {
-        if (user._id === loggedUser._id) {
+        if (user?._id === loggedUser?._id) {
             try {
                 const response = await axiosClient.delete("/chat/", {
                     data: {
@@ -228,7 +221,7 @@ function GroupInfoBox({ chat, closeGroupInfo }) {
                             }`}
                         >
                             <div className="userList">
-                                {chat.users.map((user) => (
+                                {chat?.users?.map((user) => (
                                     <div className="singleUser" key={user._id}>
                                         <div className="name">
                                             {user.username}
@@ -259,15 +252,15 @@ function GroupInfoBox({ chat, closeGroupInfo }) {
                     <div
                         className={`right ${
                             searchResults &&
-                            searchResults.length > 0 &&
-                            searchQuery.length > 0
+                            searchResults?.length > 0 &&
+                            searchQuery?.length > 0
                                 ? "visible"
                                 : ""
                         }`}
                     >
                         <div className="head">Select Users</div>
                         <ul>
-                            {searchResults.map((user) => (
+                            {searchResults?.map((user) => (
                                 <UserListItem
                                     key={user._id}
                                     user={user}

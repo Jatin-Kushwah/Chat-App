@@ -66,7 +66,7 @@ function GroupChat() {
                     {userChats
                         .filter((chat) => chat.isGroupChat)
                         .map((chat) => {
-                            const isSelected = chat === selectedChat;
+                            const isSelected = chat?._id === selectedChat?._id;
                             return (
                                 <SingleChat
                                     key={chat._id}

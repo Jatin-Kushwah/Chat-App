@@ -8,14 +8,12 @@ import GroupInfoBox from "../groupInfoBox/GroupInfoBox";
 
 function ChatBox() {
     const dispatch = useDispatch();
-    const [loggedUser, setLoggedUser] = useState();
     const [user, setUser] = useState();
     const [openProfile, setOpenProfile] = useState(false);
     const [openGroupInfo, setOpenGroupInfo] = useState(false);
-
-    const myInfo = useSelector((state) => state.userReducer.myInfo);
     const selectedChat = useSelector((state) => state.chatReducer.selectedChat);
     const openedChat = useSelector((state) => state.chatReducer.openedChat);
+    const loggedUser = useSelector((state) => state.userReducer.loggedUser);
 
     const openChat = async (chat) => {
         try {
@@ -24,12 +22,6 @@ function ChatBox() {
             console.log(error);
         }
     };
-
-    useEffect(() => {
-        if (myInfo) {
-            setLoggedUser(myInfo);
-        }
-    }, [myInfo]);
 
     useEffect(() => {
         if (openedChat) {
@@ -41,8 +33,8 @@ function ChatBox() {
 
     useEffect(() => {
         if (chatData && loggedUser) {
-            const otherUser = chatData.users.find(
-                (user) => user._id !== loggedUser._id
+            const otherUser = chatData?.users?.find(
+                (user) => user._id !== loggedUser?._id
             );
             setUser(otherUser);
         }
@@ -64,6 +56,7 @@ function ChatBox() {
                                 </div>
                                 {openProfile && (
                                     <ProfileBox
+                                        user={user}
                                         closeProfile={() =>
                                             setOpenProfile(false)
                                         }
@@ -80,7 +73,7 @@ function ChatBox() {
                                     }
                                 >
                                     <img
-                                        src={chatData.image}
+                                        src={chatData?.image}
                                         alt="chat avatar"
                                     />
                                     <h3>{chatData?.chatName}</h3>
