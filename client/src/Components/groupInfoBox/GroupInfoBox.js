@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { TiDelete } from "react-icons/ti";
 import { searchUser, setLoading } from "../../redux/slices/userSlice";
 import UserListItem from "../userListItem/UserListItem";
+import { showToast } from "../../redux/slices/appConfigSlice";
+import { TOAST_FAILURE, TOAST_SUCCESS } from "../../App";
 
 function GroupInfoBox({ chat, closeGroupInfo }) {
     const dispatch = useDispatch();
@@ -51,14 +53,35 @@ function GroupInfoBox({ chat, closeGroupInfo }) {
         }
     };
 
+    const handleImage = async (e) => {
+        const file = e.target.files[0];
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            if (fileReader.readyState === fileReader.DONE) {
+                setGroupImage(fileReader.result);
+            }
+        };
+    };
+
     const handleUserClick = async (user) => {
-        if (chat?.users.includes(user)) {
-            console.log("User is already in the group");
+        if (chat?.users.some((u) => u._id === user._id)) {
+            dispatch(
+                showToast({
+                    type: TOAST_FAILURE,
+                    message: "User is already in the group",
+                })
+            );
             return;
         }
 
         if (chat?.groupAdmin?._id !== loggedUser?._id) {
-            console.log("Only admins can add the users");
+            dispatch(
+                showToast({
+                    type: TOAST_FAILURE,
+                    message: "Only admin can add the users",
+                })
+            );
             return;
         }
 
@@ -68,9 +91,21 @@ function GroupInfoBox({ chat, closeGroupInfo }) {
                 userId: user._id,
             });
 
+            dispatch(
+                showToast({
+                    type: TOAST_SUCCESS,
+                    message: "User added successfully",
+                })
+            );
+
             updateLatestData(response.result);
         } catch (error) {
-            console.log(error);
+            dispatch(
+                showToast({
+                    type: TOAST_FAILURE,
+                    message: error,
+                })
+            );
         }
     };
 
@@ -84,10 +119,22 @@ function GroupInfoBox({ chat, closeGroupInfo }) {
                     },
                 });
 
+                dispatch(
+                    showToast({
+                        type: TOAST_SUCCESS,
+                        message: "Group left",
+                    })
+                );
+
                 dispatch(selectChat());
                 dispatch(getUserChats());
             } catch (error) {
-                console.log(error);
+                dispatch(
+                    showToast({
+                        type: TOAST_FAILURE,
+                        message: error,
+                    })
+                );
             }
         } else if (chat?.groupAdmin?._id === loggedUser?._id) {
             try {
@@ -98,51 +145,103 @@ function GroupInfoBox({ chat, closeGroupInfo }) {
                     },
                 });
 
+                dispatch(
+                    showToast({
+                        type: TOAST_SUCCESS,
+                        message: "User removed successfully",
+                    })
+                );
+
                 dispatch(selectChat(response.result));
                 dispatch(getUserChats());
             } catch (error) {
-                console.log(error);
+                dispatch(
+                    showToast({
+                        type: TOAST_FAILURE,
+                        message: error,
+                    })
+                );
             }
         } else {
-            console.log("Only admin can remove users from the group.");
+            dispatch(
+                showToast({
+                    type: TOAST_FAILURE,
+                    message: "Only admin can remove users from the group.",
+                })
+            );
         }
-    };
-
-    const handleImage = async (e) => {
-        const file = e.target.files[0];
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
-        fileReader.onload = () => {
-            if (fileReader.readyState === fileReader.DONE) {
-                setGroupImage(fileReader.result);
-            }
-        };
     };
 
     const handleImageChange = async (event) => {
         event.preventDefault();
+
+        if (chat?.groupAdmin?._id !== loggedUser?._id) {
+            dispatch(
+                showToast({
+                    type: TOAST_FAILURE,
+                    message: "Only admin can change the group image",
+                })
+            );
+            return;
+        }
+
         try {
             const response = await axiosClient.put("/chat/image", {
                 chatId: chat?._id,
                 newImage: groupImage,
             });
+
+            dispatch(
+                showToast({
+                    type: TOAST_SUCCESS,
+                    message: "Image changed successfully",
+                })
+            );
             updateLatestData(response.result);
         } catch (error) {
-            console.log(error);
+            dispatch(
+                showToast({
+                    type: TOAST_FAILURE,
+                    message: error,
+                })
+            );
         }
     };
 
     const handleNameChange = async (event) => {
         event.preventDefault();
+
+        if (chat?.groupAdmin?._id !== loggedUser?._id) {
+            dispatch(
+                showToast({
+                    type: TOAST_FAILURE,
+                    message: "Only admin can change the group name",
+                })
+            );
+            return;
+        }
+
         try {
             const response = await axiosClient.put("/chat/", {
                 chatId: chat?._id,
                 newChatName: groupName,
             });
 
+            dispatch(
+                showToast({
+                    type: TOAST_SUCCESS,
+                    message: "Name changed successfully",
+                })
+            );
+
             updateLatestData(response.result);
         } catch (error) {
-            console.log(error);
+            dispatch(
+                showToast({
+                    type: TOAST_FAILURE,
+                    message: error,
+                })
+            );
         }
     };
 

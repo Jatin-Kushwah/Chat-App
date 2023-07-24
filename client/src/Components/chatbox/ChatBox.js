@@ -5,6 +5,7 @@ import selectImg from "../../assets/SelectChat.png";
 import { selectChat } from "../../redux/slices/chatSlice";
 import ProfileBox from "../profileBox/ProfileBox";
 import GroupInfoBox from "../groupInfoBox/GroupInfoBox";
+import ChattingArea from "../chattingArea/ChattingArea";
 
 function ChatBox() {
     const dispatch = useDispatch();
@@ -89,6 +90,10 @@ function ChatBox() {
                                 )}
                             </>
                         )}
+                    </div>
+
+                    <div className="chatting">
+                        <ChattingArea chatId={chatData?._id} />
                     </div>
                 </div>
             ) : (

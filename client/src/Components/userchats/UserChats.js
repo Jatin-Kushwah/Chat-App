@@ -84,7 +84,7 @@ function UserChats() {
                 );
         } else {
             return userChats
-                .filter((chat) => !chat?.isGroupChat)
+                ?.filter((chat) => !chat?.isGroupChat)
                 .map((chat) =>
                     chat?.users?.map((user) => {
                         if (user?.username !== loggedUser?.username) {

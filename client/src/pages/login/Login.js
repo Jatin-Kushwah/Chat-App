@@ -3,11 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { axiosClient } from "../../Utils/axiosClient";
 import textImg from "../../assets/texting.png";
 import dialogBox from "../../assets/dialogBox.png";
-
 import "./Login.scss";
 import { KEY_ACCESS_TOKEN, setItem } from "../../Utils/localStorageManager";
+import { showToast } from "../../redux/slices/appConfigSlice";
+import { TOAST_SUCCESS } from "../../App";
+import { useDispatch } from "react-redux";
 
 function Login() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,6 +23,13 @@ function Login() {
                 email,
                 password,
             });
+
+            dispatch(
+                showToast({
+                    type: TOAST_SUCCESS,
+                    message: "Logged in successfully",
+                })
+            );
 
             setItem(KEY_ACCESS_TOKEN, response.result.accessToken);
             navigate("/");

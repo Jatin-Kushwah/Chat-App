@@ -110,7 +110,7 @@ const createGroupChat = async (req, res) => {
             .populate("groupAdmin", "-password")
             .populate("image");
 
-        return res.send(success(201, createdGroupChat));
+        return res.send(success(201, "Group Chat created successfully"));
     } catch (err) {
         console.log(err);
         return res.send(error(500, err.message));

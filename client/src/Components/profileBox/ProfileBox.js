@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import userImg from "../../assets/user.png";
 import { axiosClient } from "../../Utils/axiosClient";
 import { getMyInfo } from "../../redux/slices/userSlice";
+import { getUserChats } from "../../redux/slices/chatSlice";
 
 function ProfileBox({ user, closeProfile }) {
     const [isEditMode, setIsEditMode] = useState(false);
@@ -49,6 +50,7 @@ function ProfileBox({ user, closeProfile }) {
             });
 
             dispatch(getMyInfo());
+            dispatch(getUserChats());
             setIsEditMode(!isEditMode);
         } catch (error) {
             console.log(error);

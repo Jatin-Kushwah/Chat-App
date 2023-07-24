@@ -39,7 +39,7 @@ const signup = async (req, res) => {
             password: hashedPass,
         });
 
-        return res.send(success(201, "User successfully registered."));
+        return res.send(success(201, "User created successfully"));
     } catch (err) {
         console.log(err);
     }
@@ -113,7 +113,7 @@ const logout = async (req, res) => {
             httpOnly: true,
             secure: true,
         });
-        return res.send(success(200, "user logged out"));
+        return res.send(success(200, "Logged out"));
     } catch (e) {
         return res.send(error(500, e.message));
     }
