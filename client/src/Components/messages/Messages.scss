@@ -38,12 +38,17 @@
         &.my-message img {
             display: none;
         }
+    }
+    .typing {
+        display: flex;
+        gap: 4px;
+        width: 100%;
+    }
 
-        img {
-            height: 30px;
-            width: 30px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+    img {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        object-fit: cover;
     }
 }

@@ -20,6 +20,7 @@
         form {
             display: flex;
             width: 100%;
+            justify-content: center;
             gap: 1rem;
 
             .message-input {
@@ -37,6 +38,10 @@
             }
 
             .message-send-btn {
+                background-color: #1a42bc;
+                color: white;
+                padding-inline: 0.8rem;
+                border-radius: 0.3rem;
             }
         }
     }

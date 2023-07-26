@@ -7,12 +7,15 @@ import { BiMessageAdd } from "react-icons/bi";
 import { removeItem, KEY_ACCESS_TOKEN } from "../../Utils/localStorageManager";
 import { axiosClient } from "../../Utils/axiosClient";
 import { TbLogout } from "react-icons/tb";
+import { useDispatch } from "react-redux";
+import { selectChat } from "../../redux/slices/chatSlice";
 
 function SideBar() {
     const [selectedIcon, setSelectedIcon] = useState("");
 
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         // Extract the path from the location object
@@ -39,6 +42,7 @@ function SideBar() {
         try {
             await axiosClient.post("/auth/logout");
             removeItem(KEY_ACCESS_TOKEN);
+            dispatch(selectChat(null));
             navigate("/login");
         } catch (err) {
             console.log(err);
