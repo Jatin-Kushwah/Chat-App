@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Lottie from "react-lottie";
 import animationData from "../../animations/typing.json";
 
-function Messages({ messages, istyping }) {
+function Messages({ messages, istyping, typingUser }) {
     const loggedUser = useSelector((state) => state.userReducer.loggedUser);
 
     const defaultOptions = {
@@ -16,6 +16,10 @@ function Messages({ messages, istyping }) {
             preserveAspectRatio: "xMidYMid slice",
         },
     };
+
+    const isTypingUserInMessages = messages.some(
+        (message) => message?.sender?._id === typingUser?._id
+    );
 
     return (
         <ScrollableFeed className="Messages">
@@ -55,15 +59,17 @@ function Messages({ messages, istyping }) {
                     );
                 })}
 
-            {istyping ? (
-                <div>
+            {istyping &&
+            isTypingUserInMessages &&
+            typingUser?._id !== loggedUser?._id ? (
+                <div className="typing">
+                    <img src={typingUser?.image} alt="user avatar" />
                     <Lottie
                         options={defaultOptions}
-                        // height={50}
+                        height={40}
                         width={40}
                         style={{
-                            marginBottom: 15,
-                            marginLeft: 0,
+                            margin: 0,
                         }}
                     />
                 </div>

@@ -19,6 +19,7 @@ function ChattingArea({ chatId }) {
     const [socketConnected, setSocketConnected] = useState(false);
     const [typing, setTyping] = useState(false);
     const [istyping, setIsTyping] = useState(false);
+    const [typingUser, setTypingUser] = useState("");
 
     const selectedChat = useSelector((state) => state.chatReducer.selectedChat);
     const loggedUser = useSelector((state) => state.userReducer.loggedUser);
@@ -29,13 +30,19 @@ function ChattingArea({ chatId }) {
         socket.on("connected", () => {
             setSocketConnected(true);
         });
-        socket.on("typing", () => {
+        socket.on("user typing", (user) => {
             setIsTyping(true);
+            setTypingUser(user);
         });
         socket.on("stop typing", () => {
             setIsTyping(false);
         });
-    }, []);
+    });
+
+    useEffect(() => {
+        socket.off("user typing");
+        socket.off("stop typing");
+    }, [chatId, selectedChat]);
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -85,7 +92,10 @@ function ChattingArea({ chatId }) {
 
         if (socketConnected && !typing) {
             setTyping(true);
-            socket.emit("typing", selectedChat?._id);
+            socket.emit("typing", {
+                room: selectedChat?._id,
+                user: loggedUser,
+            });
         }
 
         setTimeout(() => {
@@ -121,7 +131,11 @@ function ChattingArea({ chatId }) {
     return (
         <div className="ChattingArea">
             <div className="message-container">
-                <Messages istyping={istyping} messages={messages} />
+                <Messages
+                    istyping={istyping}
+                    messages={messages}
+                    typingUser={typingUser}
+                />
             </div>
             <div className="send-input">
                 <form onSubmit={sendMessage}>
