@@ -72,6 +72,7 @@ function UserChats() {
                             const isSelected = chat?._id === selectedChat?._id;
                             return (
                                 <SingleChat
+                                    chat={chat}
                                     key={user._id}
                                     user={user}
                                     isSelected={isSelected}
@@ -91,6 +92,7 @@ function UserChats() {
                             const isSelected = chat?._id === selectedChat?._id;
                             return (
                                 <SingleChat
+                                    chat={chat}
                                     key={user._id}
                                     user={user}
                                     isSelected={isSelected}

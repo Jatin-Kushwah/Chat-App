@@ -18,11 +18,20 @@
     .nameContent {
         display: flex;
         flex-direction: column;
+        overflow: hidden;
+        white-space: nowrap;
 
         h3 {
             font-weight: 600;
             text-transform: capitalize;
             font-family: "Poppins", sans-serif;
+        }
+
+        p {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            margin: 0;
         }
     }
 }

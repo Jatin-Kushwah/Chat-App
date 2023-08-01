@@ -7,6 +7,7 @@ import { axiosClient } from "../../Utils/axiosClient";
 import Messages from "../messages/Messages";
 import { IoSendSharp } from "react-icons/io5";
 import io from "socket.io-client";
+import { getUserChats } from "../../redux/slices/chatSlice";
 
 const baseURL =
     process.env.REACT_APP_SERVER_BASE_URL || "http://localhost:4000";
@@ -118,6 +119,7 @@ function ChattingArea({ chatId }) {
 
             socket.emit("new message", response.result);
             setMessages([...messages, response.result]);
+            dispatch(getUserChats());
         } catch (error) {
             dispatch(
                 showToast({

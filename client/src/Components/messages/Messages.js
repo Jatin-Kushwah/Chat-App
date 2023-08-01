@@ -4,6 +4,7 @@ import ScrollableFeed from "react-scrollable-feed";
 import { useSelector } from "react-redux";
 import Lottie from "react-lottie";
 import animationData from "../../animations/typing.json";
+import blankImage from "../../assets/user.png";
 
 function Messages({ messages, istyping, typingUser }) {
     const loggedUser = useSelector((state) => state.userReducer.loggedUser);
@@ -40,9 +41,15 @@ function Messages({ messages, istyping, typingUser }) {
                             }`}
                             key={message._id}
                         >
-                            {showImage && (
+                            {showImage ? (
                                 <img
                                     src={message.sender.image}
+                                    alt="user avatar"
+                                />
+                            ) : (
+                                <img
+                                    className="blankImg"
+                                    src={blankImage}
                                     alt="user avatar"
                                 />
                             )}
