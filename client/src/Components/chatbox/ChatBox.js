@@ -6,6 +6,7 @@ import { selectChat } from "../../redux/slices/chatSlice";
 import ProfileBox from "../profileBox/ProfileBox";
 import GroupInfoBox from "../groupInfoBox/GroupInfoBox";
 import ChattingArea from "../chattingArea/ChattingArea";
+import { BiArrowBack } from "react-icons/bi";
 
 function ChatBox() {
     const dispatch = useDispatch();
@@ -41,11 +42,18 @@ function ChatBox() {
         }
     }, [chatData, loggedUser]);
 
+    const clearChat = async () => {
+        dispatch(selectChat(null));
+    };
+
     return (
         <div className="ChatBox">
             {chatData ? (
                 <div className="chat-container">
                     <div className="topBar">
+                        <div className="back" onClick={clearChat}>
+                            <BiArrowBack />
+                        </div>
                         {!chatData?.isGroupChat && user && (
                             <>
                                 <div

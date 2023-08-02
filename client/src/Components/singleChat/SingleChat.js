@@ -29,7 +29,7 @@ function SingleChat({ chat, user, handleClick, isSelected }) {
         if (user) {
             return (
                 <>
-                    <img src={user.image} alt="user image" />
+                    <img src={user.image} alt="user " />
                     <div className="nameContent" ref={nameContentRef}>
                         <h3>{user.username}</h3>
                         <p>{chat?.latestMessage?.text}</p>
@@ -39,7 +39,7 @@ function SingleChat({ chat, user, handleClick, isSelected }) {
         } else if (chat) {
             return (
                 <>
-                    <img src={chat.image} alt="chat image" />
+                    <img src={chat.image} alt="chat " />
                     <div className="nameContent" ref={nameContentRef}>
                         <h3>{chat.chatName}</h3>
                         <p>{chat?.latestMessage?.text}</p>

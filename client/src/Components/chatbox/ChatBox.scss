@@ -11,6 +11,20 @@
         .topBar {
             background-color: white;
             border-bottom: 1px solid #e5e5e5;
+            position: relative;
+
+            .back {
+                display: none;
+
+                @media only screen and (max-width: 600px) {
+                    display: block;
+                    position: absolute;
+                    font-size: 1.5rem;
+                    height: 100%;
+                    padding: 1.3rem;
+                    cursor: pointer;
+                }
+            }
 
             .userProfile {
                 display: flex;

@@ -86,11 +86,11 @@ function SearchBox() {
                 </div>
             </form>
             {isLoading ? (
-                <div style={{ marginTop: "16px" }}>
+                <div style={{ marginTop: "16px", width: "100%" }}>
                     <ChatLoading />
                 </div>
             ) : (
-                <ul>
+                <div className="userListItems">
                     {searchQuery === ""
                         ? allUsersData.map((user) => (
                               <UserListItem
@@ -110,7 +110,7 @@ function SearchBox() {
                                   }
                               />
                           ))}
-                </ul>
+                </div>
             )}
         </div>
     );
