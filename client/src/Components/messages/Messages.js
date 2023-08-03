@@ -34,6 +34,14 @@ function Messages({ messages, istyping, typingUser }) {
                         (!nextMessage ||
                             nextMessage?.sender?._id !== message?.sender?._id);
 
+                    const messageTime = new Date(
+                        message.createdAt
+                    ).toLocaleTimeString(undefined, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                    });
+
                     return (
                         <div
                             className={`user-message ${
@@ -60,7 +68,13 @@ function Messages({ messages, istyping, typingUser }) {
                                         : "user-text"
                                 }`}
                             >
-                                {message.text}
+                                <span className="single-message">
+                                    {message.text}
+                                </span>
+
+                                <span className="message-time">
+                                    {messageTime}
+                                </span>
                             </span>
                         </div>
                     );

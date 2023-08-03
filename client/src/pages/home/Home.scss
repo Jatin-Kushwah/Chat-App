@@ -1,7 +1,7 @@
 .Home {
     display: grid;
     height: 100vh;
-    grid-template-columns: 0.8fr 4fr 9fr;
+    grid-template-columns: 0.8fr 4.5fr 9fr;
 
     .sidebar {
         height: 100%;
@@ -52,7 +52,7 @@
     }
 
     @media only screen and (max-width: 950px) {
-        grid-template-columns: 2fr 3fr;
+        grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 9fr 0.9fr;
     }
 

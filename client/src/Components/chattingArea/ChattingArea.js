@@ -7,7 +7,7 @@ import { axiosClient } from "../../Utils/axiosClient";
 import Messages from "../messages/Messages";
 import { IoSendSharp } from "react-icons/io5";
 import io from "socket.io-client";
-import { getUserChats } from "../../redux/slices/chatSlice";
+import { getUserChats, setNotification } from "../../redux/slices/chatSlice";
 
 const baseURL =
     process.env.REACT_APP_SERVER_BASE_URL || "http://localhost:4000";
@@ -23,6 +23,7 @@ function ChattingArea({ chatId }) {
     const [typingUser, setTypingUser] = useState("");
 
     const selectedChat = useSelector((state) => state.chatReducer.selectedChat);
+    const notification = useSelector((state) => state.chatReducer.notification);
     const loggedUser = useSelector((state) => state.userReducer.loggedUser);
 
     useEffect(() => {
@@ -78,10 +79,12 @@ function ChattingArea({ chatId }) {
                 !selectedChatCompare ||
                 selectedChatCompare._id !== newMessageRecieved.chat._id
             ) {
-                // if (!notification.includes(newMessageRecieved)) {
-                //   setNotification([newMessageRecieved, ...notification]);
-                //   setFetchAgain(!fetchAgain);
-                // }
+                if (!notification?.includes(newMessageRecieved)) {
+                    dispatch(
+                        setNotification([newMessageRecieved, ...notification])
+                    );
+                    dispatch(getUserChats());
+                }
             } else {
                 setMessages([...messages, newMessageRecieved]);
             }

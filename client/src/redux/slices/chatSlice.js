@@ -27,10 +27,14 @@ const chatSlice = createSlice({
         userChats: [],
         selectedChat: null,
         openedChat: null,
+        notification: [],
     },
     reducers: {
         selectChat: (state, action) => {
             state.selectedChat = action.payload;
+        },
+        setNotification: (state, action) => {
+            state.notification = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -39,11 +43,10 @@ const chatSlice = createSlice({
                 state.userChats = action.payload;
             })
             .addCase(accessChat.fulfilled, (state, action) => {
-                console.log(action.payload);
                 state.openedChat = action.payload;
             });
     },
 });
 
 export default chatSlice.reducer;
-export const { selectChat } = chatSlice.actions;
+export const { selectChat, setNotification } = chatSlice.actions;

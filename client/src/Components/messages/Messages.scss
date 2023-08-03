@@ -1,6 +1,6 @@
 .Messages {
     padding: 10px 10px 0 10px;
-    background: url("../../assets/chatBg.jpg") center / 700px no-repeat;
+    background: url("../../assets/chatBg.jpg") center / cover no-repeat;
 
     .user-message {
         display: flex;
@@ -23,11 +23,23 @@
 
         .message-text {
             border-radius: 0.8rem;
-            padding: 0.3rem 0.6rem;
+            padding: 0.1rem 0.6rem;
             height: fit-content;
+            display: flex;
+            gap: 0.5rem;
             color: white;
             word-wrap: break-word;
             max-width: 70%;
+
+            .single-message {
+                padding-block: 0.2rem;
+            }
+
+            .message-time {
+                font-size: 0.7rem;
+                align-self: flex-end;
+                white-space: nowrap;
+            }
         }
 
         &.my-message img {
@@ -42,8 +54,8 @@
     }
 
     img {
-        height: 30px;
-        width: 30px;
+        height: 35px;
+        width: 35px;
         border-radius: 50%;
         object-fit: cover;
     }

@@ -7,6 +7,7 @@
     gap: 1rem;
     width: 100%;
     cursor: pointer;
+    position: relative;
 
     img {
         width: 50px;
@@ -33,6 +34,19 @@
             text-overflow: ellipsis;
             margin: 0;
         }
+    }
+
+    .notification-dot {
+        margin-left: auto;
+        color: #1a42bc;
+        padding-top: 1.2rem;
+    }
+
+    .latest-msg-time {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        font-size: 0.8rem;
     }
 }
 
