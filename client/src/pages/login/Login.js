@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosClient } from "../../Utils/axiosClient";
-import textImg from "../../assets/texting.png";
-import dialogBox from "../../assets/dialogBox.png";
+import dialogBox from "../../assets/dialog.png";
+import textImg from "../../assets/Texting-amico.png";
 import "./Login.scss";
 import { KEY_ACCESS_TOKEN, setItem } from "../../Utils/localStorageManager";
 import { showToast } from "../../redux/slices/appConfigSlice";
@@ -14,6 +14,17 @@ function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showRight, setShowRight] = useState(false);
+    const [leftClass, setLeftClass] = useState("scale-up");
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowRight(true);
+            setLeftClass("scale-down");
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,13 +52,17 @@ function Login() {
     return (
         <div className="Login">
             <div className="login-container">
-                <div className="left">
+                <div className={`left ${leftClass}`}>
                     <h3 className="heading">Welcome to Chatverse!</h3>
-                    <div className="chat-image">
+                    <div
+                        className={`chat-image  ${
+                            showRight ? "no-animate" : ""
+                        }`}
+                    >
                         <img src={textImg} alt="texting img" />
                     </div>
                 </div>
-                <div className="right">
+                <div className={`right ${showRight ? "fade-in" : "fade-out"}`}>
                     <div className="heading">
                         <img src={dialogBox} alt="message box" />
                         <h3>Login</h3>

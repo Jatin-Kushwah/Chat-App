@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosClient } from "../../Utils/axiosClient";
-import textImg from "../../assets/texting.png";
-import userImage from "../../assets/user.png";
-import dialogBox from "../../assets/dialogBox.png";
+import textImg from "../../assets/Texting-amico.png";
+import dialogBox from "../../assets/dialog.png";
+import userImage from "../../assets/user1.png";
 
 import "./Signup.scss";
 
