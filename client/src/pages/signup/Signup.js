@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosClient } from "../../Utils/axiosClient";
 import textImg from "../../assets/Texting-amico.png";
+import { TbCameraPlus } from "react-icons/tb";
 import dialogBox from "../../assets/dialog.png";
 import userImage from "../../assets/user1.png";
 
@@ -58,13 +59,15 @@ function Signup() {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="input-image tooltip">
-                            <span className="tooltiptext">Select Image</span>
                             <label htmlFor="image">
                                 <div className="avatar">
                                     <img
                                         src={image ? image : userImage}
                                         alt="user avatar"
                                     />
+                                    <div className="overlay">
+                                        <TbCameraPlus className="icon" />
+                                    </div>
                                 </div>
                             </label>
 
