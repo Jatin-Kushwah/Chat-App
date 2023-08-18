@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchUser } from "../../../redux/slices/userSlice";
 import UserListItem from "../../userListItem/UserListItem";
 import { TiDelete } from "react-icons/ti";
+import { TbCameraPlus } from "react-icons/tb";
 import userImage from "../../../assets/group.png";
 import { axiosClient } from "../../../Utils/axiosClient";
 
@@ -87,7 +88,7 @@ function NewGroupBox({ closeNewGroup }) {
         <div className="NewGroupBox">
             <div className="blank" onClick={closeNewGroup}></div>
             <div className="newGroup_container">
-                <div className="top">
+                <div className="top-bar">
                     <h3>Create a new group</h3>
                     <div className="back" onClick={closeNewGroup}>
                         <RxCross2 />
@@ -97,10 +98,7 @@ function NewGroupBox({ closeNewGroup }) {
                 <div className="newGroup_create">
                     <form className="left" onSubmit={handleSubmit}>
                         <div className="inputs">
-                            <div className="input-image tooltip">
-                                <span className="tooltiptext">
-                                    Select Image
-                                </span>
+                            <div className="input-image">
                                 <label htmlFor="image">
                                     <div className="avatar">
                                         <img
@@ -111,6 +109,9 @@ function NewGroupBox({ closeNewGroup }) {
                                             }
                                             alt="user avatar"
                                         />
+                                        <div className="overlay">
+                                            <TbCameraPlus className="icon" />
+                                        </div>
                                     </div>
                                 </label>
 

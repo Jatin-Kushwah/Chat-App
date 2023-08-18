@@ -6,14 +6,15 @@
     flex-direction: column;
     gap: 16px;
     padding: 2rem 2rem 0 2rem;
-    border-right: 1.5px solid #dddddd;
+    border-right: 1px solid #333446;
+    background: linear-gradient(to bottom, #40415f, #2f304c);
     overflow: hidden;
 
     .top {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid #e5e5e5;
+        border-bottom: 1px solid #818181;
         padding-bottom: 0.5rem;
 
         .heading {
@@ -32,7 +33,7 @@
         align-items: center;
         justify-content: center;
         gap: 1rem;
-        background-color: #e5e5e5;
+        background-color: #2e2f4c;
         border-radius: 8px;
         width: 100%;
         padding: 1rem;
@@ -42,14 +43,16 @@
         transition: 0.2s ease;
 
         &:hover {
-            background-color: #d6d6d6;
+            background-color: #292a47;
         }
 
         span {
+            color: #c5c5c5;
         }
 
         svg {
             font-size: 1.5rem;
+            color: #c5c5c5;
         }
     }
 

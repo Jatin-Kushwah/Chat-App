@@ -11,7 +11,7 @@
     }
 
     .send-input {
-        background-color: white;
+        background-color: #353653;
         width: 100%;
         display: flex;
         align-items: center;
@@ -24,7 +24,7 @@
             gap: 1rem;
 
             .message-input {
-                background-color: #e5e5e5;
+                background-color: #47476b;
                 padding: 0.6rem;
                 border-radius: 0.3rem;
                 border: none;
@@ -32,13 +32,13 @@
                 width: 85%;
 
                 &::placeholder {
-                    color: #464646;
+                    color: #c5c5c5;
                     font-weight: 500;
                 }
             }
 
             .message-send-btn {
-                background-color: #1a42bc;
+                background-color: #5d4df6;
                 color: white;
                 padding-inline: 0.8rem;
                 border-radius: 0.3rem;

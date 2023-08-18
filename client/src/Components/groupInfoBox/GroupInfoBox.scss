@@ -13,22 +13,27 @@
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 1;
         width: 100%;
         height: 100vh;
-        z-index: 1;
-        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0);
     }
 
     .groupInfo-container {
-        background-color: white;
+        background-color: transparent;
         min-width: -moz-fit-content;
         min-width: fit-content;
         display: flex;
         flex-direction: column;
         align-items: center;
-        z-index: 99;
+        z-index: 1;
         border-radius: 12px;
         max-height: 444px;
+
+        @media only screen and (max-width: 700px) {
+            max-height: fit-content;
+        }
 
         .top {
             display: flex;
@@ -36,8 +41,9 @@
             width: 100%;
             height: 50px;
             justify-content: center;
+            background-color: #47476b;
+            border-radius: 12px 12px 0 0;
             align-items: center;
-            border-bottom: 1px solid #e5e5e5;
             padding: 0;
 
             h3 {
@@ -63,6 +69,13 @@
     .groupInfo-update {
         display: flex;
         justify-content: space-between;
+        background: linear-gradient(to right, #30314d, #22233c);
+        border-radius: 0 0 12px 12px;
+
+        @media only screen and (max-width: 700px) {
+            flex-direction: column;
+            background: linear-gradient(to bottom, #30314d, #22233c);
+        }
 
         .left {
             display: flex;
@@ -72,26 +85,30 @@
             width: 325px;
             gap: 1rem;
 
+            @media only screen and (max-width: 700px) {
+                gap: 0.7rem;
+            }
+
             .inputs {
                 display: flex;
                 flex-direction: column;
                 gap: 0.8rem;
                 width: 100%;
 
+                @media only screen and (max-width: 700px) {
+                    gap: 0.6rem;
+                }
+
                 .change-btn {
                     width: -moz-fit-content;
                     width: fit-content;
-                    background-color: #dfc43e;
+                    background: linear-gradient(to right, #727fe7, #9474e7);
                     color: white;
                     padding: 4px 12px;
                     height: fit-content;
                     border-radius: 8px;
                     font-weight: 500;
                     font-size: 1.1rem;
-
-                    &:hover {
-                        background-color: #c6ad2e;
-                    }
                 }
 
                 .input-image {
@@ -125,13 +142,33 @@
                     }
 
                     .avatar {
+                        position: relative;
+
                         img {
                             width: 60px;
                             height: 60px;
                             max-width: 60px;
                             border-radius: 50%;
-                            border: 2px dashed #c6c3bd;
                             object-fit: cover;
+                        }
+
+                        .overlay {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            background: rgb(44, 45, 72, 0.5);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            opacity: 1;
+
+                            .icon {
+                                color: #b3b3b3;
+                                font-size: 22px;
+                            }
                         }
                     }
 
@@ -147,7 +184,7 @@
                 }
 
                 input {
-                    background: #dddddd;
+                    background-color: #47476b;
                     outline: none;
                     padding: 0.8rem;
                     border-radius: 8px;
@@ -173,7 +210,7 @@
                         .singleUser {
                             display: flex;
                             align-items: center;
-                            background: black;
+                            background: #818181;
                             color: white;
                             padding: 2px 6px;
                             border-radius: 10px;
@@ -197,7 +234,7 @@
             .leave {
                 width: -moz-fit-content;
                 width: fit-content;
-                background-color: #c1301d;
+                background: linear-gradient(to bottom, #e77272, #8074e7);
                 color: white;
                 padding: 4px 12px;
                 margin-top: 0.5rem;
@@ -205,10 +242,6 @@
                 border-radius: 8px;
                 font-weight: 500;
                 font-size: 1.1rem;
-
-                &:hover {
-                    background-color: #a32514;
-                }
             }
         }
 
@@ -220,21 +253,29 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 0.5rem;
-                border-left: 1px solid #dbdbdb;
+                border-left: 1px solid #333556;
+                width: 325px;
                 overflow: hidden;
                 max-height: 378px;
 
+                @media only screen and (max-width: 700px) {
+                    max-height: 185px;
+                    border-top: 1px solid #333556;
+                    border-left: none;
+                }
+
                 .head {
-                    background: black;
                     color: white;
                     width: 100%;
                     font-weight: 500;
                     text-align: center;
                     padding-block: 0.5rem;
+                    border-bottom: 1px solid #1e2038;
                 }
 
                 ul {
                     overflow: auto;
+                    width: 90%;
                 }
             }
         }

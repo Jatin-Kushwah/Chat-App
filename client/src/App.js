@@ -46,7 +46,11 @@ function App() {
 
     return (
         <div className="App">
-            <LoadingBar color="#1a42bc" height={4} ref={loadingRef} />
+            <LoadingBar
+                color="linear-gradient(to right, #727fe7, #9474e7)"
+                height={4}
+                ref={loadingRef}
+            />
             <div>
                 <Toaster />
             </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileBox.scss";
 import { RxCross2 } from "react-icons/rx";
+import { TbCameraPlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import userImg from "../../assets/user.png";
 import { axiosClient } from "../../Utils/axiosClient";
@@ -61,9 +62,9 @@ function ProfileBox({ user, closeProfile }) {
         <div className="ProfileBox">
             <div className="blank" onClick={closeProfile}></div>
             <div className="profile-container">
-                <div className="top">
+                <div className="top-bar">
                     <h3>Profile</h3>
-                    <div className="back" onClick={closeProfile}>
+                    <div className="cross-back" onClick={closeProfile}>
                         <RxCross2 />
                     </div>
                 </div>
@@ -87,10 +88,7 @@ function ProfileBox({ user, closeProfile }) {
                         <div className="edit-container">
                             <form onSubmit={handleSubmit}>
                                 <div className="inputs">
-                                    <div className="input-image tooltip">
-                                        <span className="tooltiptext">
-                                            Select Image
-                                        </span>
+                                    <div className="input-image ">
                                         <label htmlFor="image">
                                             <div className="avatar">
                                                 <img
@@ -101,6 +99,9 @@ function ProfileBox({ user, closeProfile }) {
                                                     }
                                                     alt="user avatar"
                                                 />
+                                                <div className="overlay">
+                                                    <TbCameraPlus className="icon" />
+                                                </div>
                                             </div>
                                         </label>
 

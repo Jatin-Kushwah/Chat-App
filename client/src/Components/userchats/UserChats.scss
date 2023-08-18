@@ -6,14 +6,15 @@
     flex-direction: column;
     gap: 16px;
     padding: 2rem 2rem 0 2rem;
-    border-right: 1.5px solid #dddddd;
+    border-right: 1px solid #333446;
+    background: linear-gradient(to bottom, #40415f, #2f304c);
     overflow: hidden;
 
     .top {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid #e5e5e5;
+        border-bottom: 1px solid #818181;
         padding-bottom: 0.5rem;
 
         .heading {
@@ -36,23 +37,23 @@
         display: flex;
         gap: 1rem;
         align-items: center;
-        background-color: #e5e5e5;
+        background-color: #2e2f4c;
         padding: 8px 27px;
         border-radius: 8px;
 
         .searchIcon {
-            color: #5a5a5a;
+            color: #c5c5c5;
             font-size: 1.4rem;
         }
 
         input {
-            background: #e5e5e5;
+            background: #2e2f4c;
             border: none;
             width: 100%;
             outline: none;
 
             &::placeholder {
-                color: #5a5a5a;
+                color: #c5c5c5;
                 font-weight: 500;
             }
         }

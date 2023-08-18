@@ -32,13 +32,14 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            color: #c5c5c5;
             margin: 0;
         }
     }
 
     .notification-dot {
         margin-left: auto;
-        color: #1a42bc;
+        color: #5d4df6;
         padding-top: 1.2rem;
     }
 
@@ -46,10 +47,11 @@
         position: absolute;
         right: 8px;
         top: 8px;
+        color: #c5c5c5;
         font-size: 0.8rem;
     }
 }
 
 .selected {
-    background-color: #efefef;
+    background-color: #818181;
 }

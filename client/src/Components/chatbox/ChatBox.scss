@@ -6,12 +6,10 @@
         display: flex;
         height: 100%;
         flex-direction: column;
-        background-color: antiquewhite;
 
         .topBar {
-            background-color: white;
-            border-bottom: 1px solid #e5e5e5;
-            position: relative;
+            background-color: #3f405e;
+            border-bottom: 1px solid #33344e;
 
             .back {
                 display: none;

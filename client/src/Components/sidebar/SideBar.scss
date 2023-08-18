@@ -5,10 +5,10 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    border-right: 1.5px solid #dddddd;
+    border-right: 1px solid #383a60;
 
     .selected {
-        background-color: #1a42bc;
+        background-color: #5d4df6;
         display: grid;
         place-content: center;
         border-radius: 0.4rem;
@@ -44,6 +44,5 @@
         flex-direction: unset;
         align-items: center;
         justify-content: space-evenly;
-        border-top: 1.5px solid #dddddd;
     }
 }

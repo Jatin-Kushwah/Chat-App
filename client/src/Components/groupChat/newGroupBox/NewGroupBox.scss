@@ -15,30 +15,36 @@
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 1;
         width: 100%;
         height: 100vh;
-        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0);
     }
 
     .newGroup_container {
-        background-color: white;
+        background-color: transparent;
         min-width: -moz-fit-content;
         min-width: fit-content;
         display: flex;
         flex-direction: column;
         align-items: center;
         z-index: 1;
-        border-radius: 12px;
         max-height: 444px;
 
-        .top {
+        @media only screen and (max-width: 700px) {
+            max-height: fit-content;
+        }
+
+        .top-bar {
             display: flex;
             position: relative;
             width: 100%;
             height: 50px;
             justify-content: center;
+            background-color: #47476b;
+            border-radius: 12px 12px 0 0;
             align-items: center;
-            border-bottom: 1px solid #e5e5e5;
             padding: 0;
 
             h3 {
@@ -64,6 +70,13 @@
     .newGroup_create {
         display: flex;
         justify-content: space-between;
+        background: linear-gradient(to right, #30314d, #22233c);
+        border-radius: 0 0 12px 12px;
+
+        @media only screen and (max-width: 700px) {
+            flex-direction: column;
+            background: linear-gradient(to bottom, #30314d, #22233c);
+        }
 
         .left {
             display: flex;
@@ -73,46 +86,18 @@
             width: 325px;
             gap: 1rem;
 
+            @media only screen and (max-width: 700px) {
+                gap: 0.7rem;
+            }
+
             .inputs {
                 display: flex;
                 flex-direction: column;
                 gap: 0.8rem;
                 width: 100%;
 
-                .tooltip {
-                    position: relative;
-                    display: inline-block;
-                }
-
-                .tooltip .tooltiptext {
-                    visibility: hidden;
-                    width: 120px;
-                    background-color: #f3f3f3;
-                    color: #75779a;
-                    text-align: center;
-                    font-size: 0.85rem;
-                    border-radius: 6px;
-                    padding: 5px 0;
-                    position: absolute;
-                    z-index: 1;
-                    font-family: "Poppins", sans-serif;
-                    top: 17%;
-                    right: 110%;
-                }
-
-                .tooltip:hover .tooltiptext {
-                    visibility: visible;
-                }
-
-                .tooltip .tooltiptext::after {
-                    content: " ";
-                    position: absolute;
-                    top: 50%;
-                    left: 100%; /* To the right of the tooltip */
-                    margin-top: -5px;
-                    border-width: 5px;
-                    border-style: solid;
-                    border-color: transparent transparent transparent #f3f3f3;
+                @media only screen and (max-width: 700px) {
+                    gap: 0.6rem;
                 }
 
                 .input-image {
@@ -134,6 +119,10 @@
                         cursor: pointer;
                         margin-bottom: 0.6rem;
 
+                        @media only screen and (max-width: 700px) {
+                            margin: 0;
+                        }
+
                         svg {
                             color: #857b79;
                             font-size: 1.2rem;
@@ -147,13 +136,33 @@
                     }
 
                     .avatar {
+                        position: relative;
+
                         img {
                             width: 60px;
                             height: 60px;
                             max-width: 60px;
                             border-radius: 50%;
-                            border: 2px dashed #c6c3bd;
                             object-fit: cover;
+                        }
+
+                        .overlay {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            background: rgb(44, 45, 72, 0.6);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            opacity: 1;
+
+                            .icon {
+                                color: #b3b3b3;
+                                font-size: 22px;
+                            }
                         }
                     }
 
@@ -163,7 +172,7 @@
                 }
 
                 input {
-                    background: #dddddd;
+                    background-color: #47476b;
                     outline: none;
                     padding: 0.8rem;
                     border-radius: 8px;
@@ -189,7 +198,7 @@
                         .singleUser {
                             display: flex;
                             align-items: center;
-                            background: black;
+                            background: #818181;
                             color: white;
                             padding: 2px 6px;
                             border-radius: 10px;
@@ -213,7 +222,7 @@
             .create {
                 width: -moz-fit-content;
                 width: fit-content;
-                background-color: #dfc43e;
+                background: linear-gradient(to right, #727fe7, #9474e7);
                 color: white;
                 padding: 4px 12px;
                 margin-top: 0.5rem;
@@ -221,10 +230,6 @@
                 border-radius: 8px;
                 font-weight: 500;
                 font-size: 1.1rem;
-
-                &:hover {
-                    background-color: #c6ad2e;
-                }
             }
         }
 
@@ -236,21 +241,29 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 0.5rem;
-                border-left: 1px solid #dbdbdb;
+                border-left: 1px solid #333556;
+                width: 325px;
                 overflow: hidden;
                 max-height: 378px;
 
+                @media only screen and (max-width: 700px) {
+                    max-height: 185px;
+                    border-top: 1px solid #333556;
+                    border-left: none;
+                }
+
                 .head {
-                    background: black;
                     color: white;
                     width: 100%;
                     font-weight: 500;
                     text-align: center;
                     padding-block: 0.5rem;
+                    border-bottom: 1px solid #1e2038;
                 }
 
                 ul {
                     overflow: auto;
+                    width: 90%;
                 }
             }
         }

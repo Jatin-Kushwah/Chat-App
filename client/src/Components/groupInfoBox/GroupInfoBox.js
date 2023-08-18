@@ -6,6 +6,7 @@ import userImage from "../../assets/user.png";
 import { getUserChats, selectChat } from "../../redux/slices/chatSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { TiDelete } from "react-icons/ti";
+import { TbCameraPlus } from "react-icons/tb";
 import { searchUser, setLoading } from "../../redux/slices/userSlice";
 import UserListItem from "../userListItem/UserListItem";
 import { showToast } from "../../redux/slices/appConfigSlice";
@@ -270,6 +271,9 @@ function GroupInfoBox({ chat, closeGroupInfo }) {
                                             }
                                             alt="user avatar"
                                         />
+                                        <div className="overlay">
+                                            <TbCameraPlus className="icon" />
+                                        </div>
                                     </div>
                                 </label>
 

@@ -1,6 +1,6 @@
 .Messages {
     padding: 10px 10px 0 10px;
-    background: url("../../assets/chatBg.jpg") center / cover no-repeat;
+    background: linear-gradient(to bottom, #3d3e58, #2f314d);
 
     .user-message {
         display: flex;
@@ -13,12 +13,12 @@
         &.my-message {
             justify-content: flex-end;
             .my-text {
-                background-color: rgb(48, 139, 185);
+                background: linear-gradient(to right, #727fe7, #9474e7);
             }
         }
 
         .user-text {
-            background-color: rgb(121, 121, 121);
+            background-color: rgb(71 71 107);
         }
 
         .message-text {
