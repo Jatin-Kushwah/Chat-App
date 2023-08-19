@@ -61,12 +61,18 @@ const { Server } = require("socket.io");
 const io = new Server(server, {
     cors: {
         credentials: true,
-        origin:
-            process.env.NODE_ENV === "production"
-                ? "https://chatverse-leqo.onrender.com"
-                : "http://localhost:3000",
+        origin: "https://chatverse-leqo.onrender.com",
     },
 });
+// const io = new Server(server, {
+//     cors: {
+//         credentials: true,
+//         origin:
+//             process.env.NODE_ENV === "production"
+//                 ? "https://chatverse-leqo.onrender.com"
+//                 : "http://localhost:3000",
+//     },
+// });
 
 io.on("connection", (socket) => {
     console.log("connected to socket.io");
