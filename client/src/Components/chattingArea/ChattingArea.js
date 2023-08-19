@@ -9,10 +9,11 @@ import { IoSendSharp } from "react-icons/io5";
 import io from "socket.io-client";
 import { getUserChats, setNotification } from "../../redux/slices/chatSlice";
 
-let baseURL = "http://localhost:4000/";
-if (process.env.NODE_ENV === "production") {
-    baseURL = process.env.REACT_APP_SERVER_BASE_URL;
-}
+const devBaseUrl = "http://localhost:4000/";
+const prodBaseUrl = process.env.REACT_APP_SERVER_BASE_URL;
+
+const baseURL =
+    process.env.NODE_ENV === "production" ? prodBaseUrl : devBaseUrl;
 
 var socket, selectedChatCompare;
 
