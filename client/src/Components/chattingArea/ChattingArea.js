@@ -10,7 +10,7 @@ import io from "socket.io-client";
 import { getUserChats, setNotification } from "../../redux/slices/chatSlice";
 
 const devBaseUrl = "http://localhost:4000/";
-const prodBaseUrl = process.env.REACT_APP_SERVER_BASE_URL;
+const prodBaseUrl = "https://chat-app-kappa-beryl.vercel.app/";
 
 const baseURL =
     process.env.NODE_ENV === "production" ? prodBaseUrl : devBaseUrl;
