@@ -30,10 +30,15 @@ const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(morgan("common"));
 
+let origin = "http://localhost:3000";
+if (process.env.NODE_ENV === "production") {
+    origin = process.env.CORS_ORIGIN;
+}
+
 app.use(
     cors({
         credentials: true,
-        origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+        origin,
     })
 );
 
