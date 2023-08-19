@@ -63,7 +63,7 @@ const io = require("socket.io")(server, {
         credentials: true,
         origin:
             process.env.NODE_ENV === "production"
-                ? "https://chatverse-leqo.onrender.com/"
+                ? "https://chatverse-leqo.onrender.com"
                 : "http://localhost:3000",
     },
 });

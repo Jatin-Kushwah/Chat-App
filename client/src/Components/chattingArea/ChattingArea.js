@@ -9,8 +9,8 @@ import { IoSendSharp } from "react-icons/io5";
 import io from "socket.io-client";
 import { getUserChats, setNotification } from "../../redux/slices/chatSlice";
 
-const devBaseUrl = "http://localhost:4000/";
-const prodBaseUrl = "https://chat-app-kappa-beryl.vercel.app/";
+const devBaseUrl = "http://localhost:4000";
+const prodBaseUrl = "https://chat-app-kappa-beryl.vercel.app";
 
 const baseURL =
     process.env.NODE_ENV === "production" ? prodBaseUrl : devBaseUrl;
