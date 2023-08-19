@@ -32,7 +32,7 @@ app.use(morgan("common"));
 
 let origin = "http://localhost:3000";
 if (process.env.NODE_ENV === "production") {
-    origin = process.env.CORS_ORIGIN;
+    origin = "https://chatverse-leqo.onrender.com";
 }
 
 app.use(
@@ -61,18 +61,12 @@ const { Server } = require("socket.io");
 const io = new Server(server, {
     cors: {
         credentials: true,
-        origin: "https://chatverse-leqo.onrender.com",
+        origin:
+            process.env.NODE_ENV === "production"
+                ? "https://chatverse-leqo.onrender.com"
+                : "http://localhost:3000",
     },
 });
-// const io = new Server(server, {
-//     cors: {
-//         credentials: true,
-//         origin:
-//             process.env.NODE_ENV === "production"
-//                 ? "https://chatverse-leqo.onrender.com"
-//                 : "http://localhost:3000",
-//     },
-// });
 
 io.on("connection", (socket) => {
     console.log("connected to socket.io");

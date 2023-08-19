@@ -9,9 +9,9 @@ import store from "../redux/Store";
 import { setBarLoading, showToast } from "../redux/slices/appConfigSlice";
 import { TOAST_SUCCESS, TOAST_FAILURE } from "../App";
 
-let baseURL = "http://localhost:4000/";
+let baseURL = "http://localhost:4000";
 if (process.env.NODE_ENV === "production") {
-    baseURL = process.env.REACT_APP_SERVER_BASE_URL;
+    baseURL = "https://chat-app-kappa-beryl.vercel.app";
 }
 
 export const axiosClient = axios.create({
