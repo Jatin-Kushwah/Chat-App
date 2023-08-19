@@ -57,24 +57,16 @@ const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`Listening on PORT ${PORT}`);
 });
 
-const io = require("socket.io")(server, {
-    pingTimeout: 6000,
+const { Server } = require("socket.io");
+const io = new Server(server, {
     cors: {
         credentials: true,
-        origin: "*",
+        origin:
+            process.env.NODE_ENV === "production"
+                ? "https://chatverse-leqo.onrender.com"
+                : "http://localhost:3000",
     },
 });
-
-// const io = require("socket.io")(server, {
-//     pingTimeout: 6000,
-//     cors: {
-//         credentials: true,
-//         origin:
-//             process.env.NODE_ENV === "production"
-//                 ? "https://chatverse-leqo.onrender.com"
-//                 : "http://localhost:3000",
-//     },
-// });
 
 io.on("connection", (socket) => {
     console.log("connected to socket.io");

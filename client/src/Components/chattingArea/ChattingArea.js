@@ -31,8 +31,11 @@ function ChattingArea({ chatId }) {
     const loggedUser = useSelector((state) => state.userReducer.loggedUser);
 
     useEffect(() => {
-        socket = io(baseURL);
+        socket = io(baseURL, {
+            withCredentials: true,
+        });
         socket.emit("setup", loggedUser);
+
         socket.on("connected", () => {
             setSocketConnected(true);
         });
