@@ -9,8 +9,11 @@ import { IoSendSharp } from "react-icons/io5";
 import io from "socket.io-client";
 import { getUserChats, setNotification } from "../../redux/slices/chatSlice";
 
-const baseURL =
-    process.env.REACT_APP_SERVER_BASE_URL || "http://localhost:4000";
+let baseURL = "http://localhost:4000/";
+if (process.env.NODE_ENV === "production") {
+    baseURL = process.env.REACT_APP_SERVER_BASE_URL;
+}
+
 var socket, selectedChatCompare;
 
 function ChattingArea({ chatId }) {
