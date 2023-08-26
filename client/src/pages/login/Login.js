@@ -96,7 +96,7 @@ function Login() {
                     </div>
 
                     <p className="bottom-heading">
-                        Already have an account?
+                        Do not have an account?
                         <span>
                             <Link to="/signup">Sign Up</Link>
                         </span>
